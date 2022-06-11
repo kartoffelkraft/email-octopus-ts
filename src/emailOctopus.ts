@@ -1,18 +1,11 @@
+import { createContact } from "./lists/createContact";
 import { getAllContacts } from "./lists/getAllContacts";
 
-type EmailOctopusOptions = {
-  version: "1.5" | "1.6";
-};
-
-export const emailOctopus = (
-  apiKey: string,
-  EmailOctopusOptions?: EmailOctopusOptions,
-) => {
-  const options = EmailOctopusOptions || { version: "1.5" };
-
+export const emailOctopus = (apiKey: string) => {
   return {
     lists: {
       getAllContacts: getAllContacts(apiKey),
+      createContact: createContact(apiKey),
     },
   };
 };

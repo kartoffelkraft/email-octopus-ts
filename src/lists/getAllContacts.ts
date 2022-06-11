@@ -1,7 +1,6 @@
 import axios from "axios";
-import { ApiKeyInvalidError } from "src/errors/ApiKeyInvalidError";
-import { InvalidParametersError } from "src/errors/InvalidParametersError";
-import { UnauthorisedError } from "src/errors/UnauthorisedError";
+import { handleApiGlobalErrors } from "src/handlers/apiGlobalErrorHandler";
+import { ApiWideErrorResponses, Contact } from "src/types";
 import { EmailOctopusError } from "../errors/EmailOctopusError";
 
 type GetAllContactsProps = {
@@ -14,15 +13,6 @@ type GetAllContactsOptions = {
   autoPaginate?: boolean;
 };
 
-type Contact = {
-  id: string;
-  email_address: string;
-  fields: Record<string, unknown>;
-  tags: Array<string>;
-  status: "SUBSCRIBED" | "UNSUBSCRIBED" | "PENDING";
-  created_at: string;
-};
-
 type GetAllContactsResponse = {
   data: Array<Contact>;
   paging: {
@@ -31,19 +21,12 @@ type GetAllContactsResponse = {
   };
 };
 
-type GetAllContactsError = {
-  code:
-    | "INVALID_PARAMETERS"
-    | "API_KEY_INVALID"
-    | "UNAUTHORISED"
-    | "NOT_FOUND"
-    | "UNKNOWN";
-  message: string;
-};
-
 export const getAllContacts =
   (apiKey: string) =>
-  async (props: GetAllContactsProps, options?: GetAllContactsOptions) => {
+  async (
+    props: GetAllContactsProps,
+    options?: GetAllContactsOptions,
+  ): Promise<Array<Contact>> => {
     let page = (options?.autoPaginate ? 1 : props.page) || 1;
 
     let next: null | string = "next-initial";
@@ -71,19 +54,8 @@ export const getAllContacts =
       } while (next !== null);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        const errorData = error.response?.data as GetAllContactsError;
-        if (error.code === "INVALID_PARAMETERS") {
-          throw new InvalidParametersError(errorData.message);
-        }
-        if (error.code === "API_KEY_INVALID") {
-          throw new ApiKeyInvalidError(errorData.message);
-        }
-        if (error.code === "UNAUTHORISED") {
-          throw new UnauthorisedError(errorData.message);
-        }
-        if (error.code === "NOT_FOUND") {
-          throw new NotFoundError(errorData.message);
-        }
+        const errorData = error.response?.data as ApiWideErrorResponses;
+        handleApiGlobalErrors(error, errorData);
       }
       throw new EmailOctopusError();
     }
