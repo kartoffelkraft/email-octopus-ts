@@ -1,0 +1,30 @@
+{
+  "name": "email-octopus-ts",
+  "type": "module",
+  "source": "src/emailOctopus.ts",
+  "exports": {
+    "require": "./dist/emailOctous.cjs",
+    "default": "./dist/emailOctous.modern.js"
+  },
+  "main": "./dist/emailOctous.cjs",
+  "module": ".ss/distss/emailOctous.module.js",
+  "unpkg": "./dist/emailOctous.umd.js",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.1",
+    "microbundle": "^0.15.0",
+    "prettier": "^2.6.2"
+  },
+  "dependencies": {
+    "axios": "^0.27.2"
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
+  }
+}
