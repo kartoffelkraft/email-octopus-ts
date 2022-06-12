@@ -5,16 +5,17 @@
   "maintainers": [
     "Kevin Peters <kevinigeligeligel@gmail.com>"
   ],
-  "version": "0.0.1",
+  "version": "0.0.4",
   "type": "module",
   "source": "src/emailOctopus.ts",
   "exports": {
-    "require": "./dist/emailOctous.cjs",
-    "default": "./dist/emailOctous.modern.js"
+    "require": "./dist/emailOctopus.cjs",
+    "default": "./dist/emailOctopus.modern.js"
   },
-  "main": "./dist/emailOctous.cjs",
-  "module": ".ss/distss/emailOctous.module.js",
-  "unpkg": "./dist/emailOctous.umd.js",
+  "main": "./dist/emailOctopus.cjs",
+  "module": "./dist/emailOctopus.module.js",
+  "unpkg": "./dist/emailOctopus.umd.js",
+  "types": "dist/emailOctopus.d.ts",
   "scripts": {
     "build": "microbundle",
     "dev": "microbundle watch",
