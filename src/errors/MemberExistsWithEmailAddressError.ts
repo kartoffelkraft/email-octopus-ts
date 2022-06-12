@@ -1,4 +1,4 @@
-export class MemberExistsWithEmailAddress extends Error {
+export class MemberExistsWithEmailAddressError extends Error {
   code = "MEMBER_EXISTS_WITH_EMAIL_ADDRESS";
   message: string = "A contact already exists with the supplied email address.";
 
@@ -9,6 +9,6 @@ export class MemberExistsWithEmailAddress extends Error {
 
     this.message =
       message || "A contact already exists with the supplied email address.";
-    this.name = "MemberExistsWithEmailAddress";
+    this.name = "MemberExistsWithEmailAddressError";
   }
 }

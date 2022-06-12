@@ -1,6 +1,6 @@
 import axios from "axios";
 import { EmailOctopusError } from "src/errors/EmailOctopusError";
-import { MemberExistsWithEmailAddress } from "src/errors/MemberExistsWithEmailAddress";
+import { MemberExistsWithEmailAddressError } from "src/errors/MemberExistsWithEmailAddressError";
 import { handleApiGlobalErrors } from "src/handlers/apiGlobalErrorHandler";
 import { ApiWideErrorResponses, Contact } from "src/types";
 
@@ -38,7 +38,7 @@ export const createContact =
           | ApiWideErrorResponses
           | CreateContactErrorResponse;
         if (errorData.code === "MEMBER_EXISTS_WITH_EMAIL_ADDRESS") {
-          throw new MemberExistsWithEmailAddress();
+          throw new MemberExistsWithEmailAddressError();
         }
         handleApiGlobalErrors(error, errorData);
       }
