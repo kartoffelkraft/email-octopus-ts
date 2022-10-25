@@ -3,6 +3,7 @@ import { ApiKeyInvalidError } from "src/errors/ApiKeyInvalidError";
 import { InvalidParametersError } from "src/errors/InvalidParametersError";
 import { NotFoundError } from "src/errors/NotFoundError";
 import { UnauthorisedError } from "src/errors/UnauthorisedError";
+import { UnknownError } from "src/errors/UnknownError";
 import { ApiWideErrorResponses } from "src/types";
 
 export const handleApiGlobalErrors = (
@@ -20,5 +21,8 @@ export const handleApiGlobalErrors = (
   }
   if (error.code === "NOT_FOUND") {
     throw new NotFoundError(errorData.message);
+  }
+  if (error.code === "UNKNOWN") {
+    throw new UnknownError(errorData.message);
   }
 };
