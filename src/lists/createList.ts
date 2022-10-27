@@ -1,38 +1,28 @@
 import axios from "axios";
-import { EmailOctopusError } from "src/emailOctopus";
+import { EmailOctopusError } from "src/errors/EmailOctopusError";
 import { handleApiGlobalErrors } from "src/handlers/apiGlobalErrorHandler";
 import { ApiWideErrorResponses } from "src/types";
-import { List, Paging } from "./types";
+import { List } from "./types";
 
-type GetAllListProps = {
-  limit?: number;
-  page?: number;
+type CreateListProps = {
+  name: string;
 };
 
-type AllLists = {
-  data: Array<List>;
-  paging: Paging;
-};
-
-export const getAllLists =
+export const createList =
   (apiKey: string) =>
-  async (props: GetAllListProps): Promise<AllLists> => {
+  async (props: CreateListProps): Promise<List> => {
     try {
-      const response = await axios.get<AllLists>(
+      const response = await axios.post<List>(
         `https://emailoctopus.com/api/1.6/lists`,
         {
-          params: {
-            api_key: apiKey,
-            limit: props.limit || 100,
-            page: props.page || 1,
-          },
+          api_key: apiKey,
+          name: props.name,
         },
       );
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorData = error.response?.data as ApiWideErrorResponses;
-
         handleApiGlobalErrors(error, errorData);
       }
       throw new EmailOctopusError();

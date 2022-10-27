@@ -18,10 +18,12 @@ export const getList =
   (apiKey: string) =>
   async (props: GetListProps): Promise<List> => {
     try {
-      const response = await axios.post<List>(
+      const response = await axios.get<List>(
         `https://emailoctopus.com/api/1.6/lists/${props.listId}`,
         {
-          api_key: apiKey,
+          params: {
+            api_key: apiKey,
+          },
         },
       );
       return response.data;
