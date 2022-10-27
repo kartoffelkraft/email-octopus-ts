@@ -18,12 +18,14 @@ export const getAllLists =
   (apiKey: string) =>
   async (props: GetAllListProps): Promise<AllLists> => {
     try {
-      const response = await axios.post<AllLists>(
+      const response = await axios.get<AllLists>(
         `https://emailoctopus.com/api/1.6/lists`,
         {
-          api_key: apiKey,
-          limit: props.limit || 100,
-          page: props.page || 1,
+          params: {
+            api_key: apiKey,
+            limit: props.limit || 100,
+            page: props.page || 1,
+          },
         },
       );
       return response.data;
