@@ -6,6 +6,7 @@ import { NotFoundError } from "./errors/NotFoundError";
 import { UnauthorisedError } from "./errors/UnauthorisedError";
 import { createContact } from "./lists/createContact";
 import { getAllContacts } from "./lists/getAllContacts";
+import { getAllLists } from "./lists/getAllLists";
 import { getList } from "./lists/getList";
 
 export {
@@ -21,6 +22,7 @@ export const emailOctopus = (apiKey: string) => {
   return {
     lists: {
       getList: getList(apiKey),
+      getAllLists: getAllLists(apiKey),
       getAllContacts: getAllContacts(apiKey),
       createContact: createContact(apiKey),
     },

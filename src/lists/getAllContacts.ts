@@ -2,6 +2,7 @@ import axios from "axios";
 import { handleApiGlobalErrors } from "src/handlers/apiGlobalErrorHandler";
 import { ApiWideErrorResponses, Contact } from "src/types";
 import { EmailOctopusError } from "../errors/EmailOctopusError";
+import { Paging } from "./types";
 
 type GetAllContactsProps = {
   listId: string;
@@ -15,10 +16,7 @@ type GetAllContactsOptions = {
 
 type GetAllContactsResponse = {
   data: Array<Contact>;
-  paging: {
-    previous: null | string;
-    next: null | string;
-  };
+  paging: Paging;
 };
 
 export const getAllContacts =

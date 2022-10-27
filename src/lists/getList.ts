@@ -3,31 +3,10 @@ import { EmailOctopusError } from "src/errors/EmailOctopusError";
 import { ListNotFoundError } from "src/errors/ListNotFoundError";
 import { handleApiGlobalErrors } from "src/handlers/apiGlobalErrorHandler";
 import { ApiWideErrorResponses } from "src/types";
+import { List } from "./types";
 
 type GetListProps = {
   listId: string;
-};
-
-type Field = {
-  tag: string;
-  type: string;
-  label: string;
-  fallback: string;
-};
-
-type Counts = {
-  pending: number;
-  subscribed: number;
-  unsubscribed: number;
-};
-
-type List = {
-  id: string;
-  name: string;
-  double_opt_in: boolean;
-  fields: Array<Field>;
-  counts: Counts;
-  created_at: string;
 };
 
 type GetListErrorListNotFound = {
