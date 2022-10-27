@@ -5,6 +5,7 @@ import { MemberExistsWithEmailAddressError } from "./errors/MemberExistsWithEmai
 import { NotFoundError } from "./errors/NotFoundError";
 import { UnauthorisedError } from "./errors/UnauthorisedError";
 import { createContact } from "./lists/createContact";
+import { createList } from "./lists/createList";
 import { getAllContacts } from "./lists/getAllContacts";
 import { getAllLists } from "./lists/getAllLists";
 import { getList } from "./lists/getList";
@@ -23,6 +24,7 @@ export const emailOctopus = (apiKey: string) => {
     lists: {
       getList: getList(apiKey),
       getAllLists: getAllLists(apiKey),
+      createList: createList(apiKey),
       getAllContacts: getAllContacts(apiKey),
       createContact: createContact(apiKey),
     },
