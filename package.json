@@ -22,7 +22,7 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@types/jest": "^29.2.2",
+    "@types/jest": "^29.2.3",
     "husky": "^8.0.2",
     "lint-staged": "^13.0.3",
     "microbundle": "^0.15.1",
