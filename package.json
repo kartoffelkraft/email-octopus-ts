@@ -29,7 +29,7 @@
     "prettier": "^2.7.1"
   },
   "dependencies": {
-    "axios": "^0.27.2"
+    "axios": "^1.3.4"
   },
   "lint-staged": {
     "*.{md,yml,json}": "prettier --write",
