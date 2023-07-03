@@ -24,7 +24,7 @@
   "devDependencies": {
     "@types/jest": "^29.5.2",
     "husky": "^8.0.3",
-    "lint-staged": "^13.1.0",
+    "lint-staged": "^13.2.3",
     "microbundle": "^0.15.1",
     "prettier": "^2.8.8"
   },
