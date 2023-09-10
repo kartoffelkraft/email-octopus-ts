@@ -19,3 +19,8 @@ export type List = {
   counts: Counts;
   created_at: string;
 };
+
+export type Paging = {
+  previous: string | null;
+  next: string | null;
+};
