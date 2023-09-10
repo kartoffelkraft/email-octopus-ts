@@ -17,6 +17,7 @@
   "unpkg": "./dist/emailOctopus.umd.js",
   "types": "dist/emailOctopus.d.ts",
   "scripts": {
+    "format:all": "prettier --write .",
     "build": "microbundle",
     "dev": "microbundle watch",
     "prepare": "husky install"
