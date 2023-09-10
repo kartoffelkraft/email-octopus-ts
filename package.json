@@ -17,6 +17,7 @@
   "unpkg": "./dist/emailOctopus.umd.js",
   "types": "dist/emailOctopus.d.ts",
   "scripts": {
+    "format:all": "prettier --write .",
     "build": "microbundle",
     "dev": "microbundle watch",
     "prepare": "husky install"
@@ -26,7 +27,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.2.3",
     "microbundle": "^0.15.1",
-    "prettier": "^2.8.8"
+    "prettier": "^3.0.3"
   },
   "dependencies": {
     "axios": "^0.27.2"
