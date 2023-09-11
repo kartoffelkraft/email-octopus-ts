@@ -134,5 +134,3 @@ I am a indie hacker and I am using Email Octopus for several side projects becau
 ## Licence
 
 [MIT](./LICENSE)
-
-<!-- Trigger Release -->
