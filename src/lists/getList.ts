@@ -1,9 +1,9 @@
 import axios from "axios";
-import { EmailOctopusError } from "src/errors/EmailOctopusError";
-import { ListNotFoundError } from "src/errors/ListNotFoundError";
-import { handleApiGlobalErrors } from "src/handlers/apiGlobalErrorHandler";
-import { ApiWideErrorResponses } from "src/types";
 import { List } from "./types";
+import { EmailOctopusError } from "../emailOctopus";
+import { ListNotFoundError } from "../errors/ListNotFoundError";
+import { handleApiGlobalErrors } from "../handlers/apiGlobalErrorHandler";
+import { ApiWideErrorResponses } from "../types";
 
 type GetListProps = {
   listId: string;

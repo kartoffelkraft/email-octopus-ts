@@ -1,8 +1,8 @@
 import axios from "axios";
-import { EmailOctopusError } from "src/emailOctopus";
-import { handleApiGlobalErrors } from "src/handlers/apiGlobalErrorHandler";
-import { ApiWideErrorResponses } from "src/types";
 import { List, Paging } from "./types";
+import { EmailOctopusError } from "../emailOctopus";
+import { handleApiGlobalErrors } from "../handlers/apiGlobalErrorHandler";
+import { ApiWideErrorResponses } from "../types";
 
 type GetAllListProps = {
   limit?: number;

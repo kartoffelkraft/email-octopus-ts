@@ -1,10 +1,12 @@
 import { AxiosError } from "axios";
-import { ApiKeyInvalidError } from "src/errors/ApiKeyInvalidError";
-import { InvalidParametersError } from "src/errors/InvalidParametersError";
-import { NotFoundError } from "src/errors/NotFoundError";
-import { UnauthorisedError } from "src/errors/UnauthorisedError";
-import { UnknownError } from "src/errors/UnknownError";
-import { ApiWideErrorResponses } from "src/types";
+import {
+  InvalidParametersError,
+  ApiKeyInvalidError,
+  UnauthorisedError,
+  NotFoundError,
+} from "../emailOctopus";
+import { UnknownError } from "../errors/UnknownError";
+import { ApiWideErrorResponses } from "../types";
 
 export const handleApiGlobalErrors = (
   error: AxiosError,

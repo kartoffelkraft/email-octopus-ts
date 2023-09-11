@@ -1,8 +1,10 @@
 import axios from "axios";
-import { EmailOctopusError } from "src/errors/EmailOctopusError";
-import { MemberExistsWithEmailAddressError } from "src/errors/MemberExistsWithEmailAddressError";
-import { handleApiGlobalErrors } from "src/handlers/apiGlobalErrorHandler";
-import { ApiWideErrorResponses, Contact } from "src/types";
+import {
+  MemberExistsWithEmailAddressError,
+  EmailOctopusError,
+} from "../emailOctopus";
+import { handleApiGlobalErrors } from "../handlers/apiGlobalErrorHandler";
+import { Contact, ApiWideErrorResponses } from "../types";
 
 type CreateContactProps = {
   listId: string;
