@@ -6,7 +6,7 @@ import {
 import { handleApiGlobalErrors } from "../handlers/apiGlobalErrorHandler";
 import { Contact, ApiWideErrorResponses } from "../types";
 
-type CreateContactProps = {
+export type CreateContactProps = {
   listId: string;
   emailAddress: string;
   fields?: Record<string, unknown>;
@@ -35,7 +35,8 @@ export const createContact =
       );
       return response.data;
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
+      const isAxiosError = axios.isAxiosError(error);
+      if (isAxiosError && error.response) {
         const errorData = error.response?.data as
           | ApiWideErrorResponses
           | CreateContactErrorResponse;

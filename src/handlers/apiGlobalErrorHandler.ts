@@ -12,19 +12,19 @@ export const handleApiGlobalErrors = (
   error: AxiosError,
   errorData: ApiWideErrorResponses,
 ): void => {
-  if (error.code === "INVALID_PARAMETERS") {
+  if (errorData.code === "INVALID_PARAMETERS") {
     throw new InvalidParametersError(errorData.message);
   }
-  if (error.code === "API_KEY_INVALID") {
+  if (errorData.code === "API_KEY_INVALID") {
     throw new ApiKeyInvalidError(errorData.message);
   }
-  if (error.code === "UNAUTHORISED") {
+  if (errorData.code === "UNAUTHORISED") {
     throw new UnauthorisedError(errorData.message);
   }
-  if (error.code === "NOT_FOUND") {
+  if (errorData.code === "NOT_FOUND") {
     throw new NotFoundError(errorData.message);
   }
-  if (error.code === "UNKNOWN") {
+  if (errorData.code === "UNKNOWN") {
     throw new UnknownError(errorData.message);
   }
 };
