@@ -1,8 +1,8 @@
 import axios from "axios";
-import { EmailOctopusError } from "src/errors/EmailOctopusError";
-import { handleApiGlobalErrors } from "src/handlers/apiGlobalErrorHandler";
-import { ApiWideErrorResponses } from "src/types";
 import { List } from "./types";
+import { EmailOctopusError } from "../emailOctopus";
+import { handleApiGlobalErrors } from "../handlers/apiGlobalErrorHandler";
+import { ApiWideErrorResponses } from "../types";
 
 type CreateListProps = {
   name: string;

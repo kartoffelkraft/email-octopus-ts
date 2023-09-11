@@ -1,8 +1,8 @@
 import axios from "axios";
-import { handleApiGlobalErrors } from "src/handlers/apiGlobalErrorHandler";
-import { ApiWideErrorResponses, Contact } from "src/types";
 import { EmailOctopusError } from "../errors/EmailOctopusError";
 import { Paging } from "./types";
+import { handleApiGlobalErrors } from "../handlers/apiGlobalErrorHandler";
+import { Contact, ApiWideErrorResponses } from "../types";
 
 type GetAllContactsProps = {
   listId: string;

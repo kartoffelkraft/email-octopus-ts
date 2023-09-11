@@ -14,8 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "types": ["@types/jest"],
-    "incremental": true,
-    "baseUrl": "."
+    "incremental": true
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx", "./src/*.js", "./src/**/*.js"],
   "exclude": ["node_modules"]
