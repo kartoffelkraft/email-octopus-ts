@@ -9,14 +9,9 @@ import {
   UnauthorisedError,
 } from "../emailOctopus";
 import { UnknownError } from "../errors/UnknownError";
+import AxiosMockAdapter from "axios-mock-adapter";
 
-jest.mock("axios", () => {
-  const originalModule = jest.requireActual("axios");
-  return {
-    ...originalModule,
-    get: jest.fn(),
-  };
-});
+const mockAxios = new AxiosMockAdapter(axios);
 
 describe("getList", () => {
   const FAKE_API_KEY = "1c2b40da-5fa3-11ee-8c99-0242ac120002";
@@ -29,8 +24,8 @@ describe("getList", () => {
         name: "List 1",
       };
 
-      const mockAxios = axios.get as jest.MockedFunction<typeof axios.get>;
-      mockAxios.mockResolvedValue({ data: expectedList });
+      mockAxios.onGet().replyOnce(200, expectedList);
+      jest.spyOn(axios, "get");
 
       const result = await getList(FAKE_API_KEY)({ listId });
 
@@ -45,15 +40,12 @@ describe("getList", () => {
   describe("request with error", () => {
     describe("indicates list not found", () => {
       it("should throw ListNotFoundError", async () => {
-        const mockError = new AxiosError("List not found");
-        mockError.response = {
-          data: {
-            code: "LIST_NOT_FOUND",
-          },
-        } as AxiosResponse;
+        const mockError = {
+          code: "LIST_NOT_FOUND",
+          message: "List not found",
+        };
 
-        const mockAxios = axios.get as jest.MockedFunction<typeof axios.get>;
-        mockAxios.mockRejectedValue(mockError);
+        mockAxios.onGet().replyOnce(404, mockError);
 
         const result = await getList(FAKE_API_KEY)({ listId }).catch(
           (error) => error,
@@ -66,15 +58,12 @@ describe("getList", () => {
     describe("indicates global errors", () => {
       describe("with invalid parameters", () => {
         it("should throw InvalidParametersError", async () => {
-          const mockError = new AxiosError("Invalid Parameters");
-          mockError.response = {
-            data: {
-              code: "INVALID_PARAMETERS",
-            },
-          } as AxiosResponse;
+          const mockError = {
+            code: "INVALID_PARAMETERS",
+            message: "Invalid parameters",
+          };
 
-          const mockAxios = axios.get as jest.MockedFunction<typeof axios.get>;
-          mockAxios.mockRejectedValue(mockError);
+          mockAxios.onGet().replyOnce(400, mockError);
 
           const result = await getList(FAKE_API_KEY)({ listId }).catch(
             (error) => error,
@@ -86,15 +75,12 @@ describe("getList", () => {
 
       describe("with invalid api key", () => {
         it("should throw ApiKeyInvalidError", async () => {
-          const mockError = new AxiosError("Invalid Parameters");
-          mockError.response = {
-            data: {
-              code: "API_KEY_INVALID",
-            },
-          } as AxiosResponse;
+          const mockError = {
+            code: "API_KEY_INVALID",
+            message: "Invalid API key",
+          };
 
-          const mockAxios = axios.get as jest.MockedFunction<typeof axios.get>;
-          mockAxios.mockRejectedValue(mockError);
+          mockAxios.onGet().replyOnce(401, mockError);
 
           const result = await getList(FAKE_API_KEY)({ listId }).catch(
             (error) => error,
@@ -106,15 +92,12 @@ describe("getList", () => {
 
       describe("with not authorized", () => {
         it("should throw UnauthorisedError", async () => {
-          const mockError = new AxiosError("Invalid Parameters");
-          mockError.response = {
-            data: {
-              code: "UNAUTHORISED",
-            },
-          } as AxiosResponse;
+          const mockError = {
+            code: "UNAUTHORISED",
+            message: "Not authorized",
+          };
 
-          const mockAxios = axios.get as jest.MockedFunction<typeof axios.get>;
-          mockAxios.mockRejectedValue(mockError);
+          mockAxios.onGet().replyOnce(401, mockError);
 
           const result = await getList(FAKE_API_KEY)({ listId }).catch(
             (error) => error,
@@ -126,15 +109,12 @@ describe("getList", () => {
 
       describe("with not found", () => {
         it("should throw NotFoundError", async () => {
-          const mockError = new AxiosError("Invalid Parameters");
-          mockError.response = {
-            data: {
-              code: "NOT_FOUND",
-            },
-          } as AxiosResponse;
+          const mockError = {
+            code: "NOT_FOUND",
+            message: "Not found",
+          };
 
-          const mockAxios = axios.get as jest.MockedFunction<typeof axios.get>;
-          mockAxios.mockRejectedValue(mockError);
+          mockAxios.onGet().replyOnce(404, mockError);
 
           const result = await getList(FAKE_API_KEY)({ listId }).catch(
             (error) => error,
@@ -146,15 +126,12 @@ describe("getList", () => {
 
       describe("with unknown", () => {
         it("should throw UnknownError", async () => {
-          const mockError = new AxiosError("Invalid Parameters");
-          mockError.response = {
-            data: {
-              code: "UNKNOWN",
-            },
-          } as AxiosResponse;
+          const mockError = {
+            code: "UNKNOWN",
+            message: "Unknown error",
+          };
 
-          const mockAxios = axios.get as jest.MockedFunction<typeof axios.get>;
-          mockAxios.mockRejectedValue(mockError);
+          mockAxios.onGet().replyOnce(500, mockError);
 
           const result = await getList(FAKE_API_KEY)({ listId }).catch(
             (error) => error,
@@ -167,8 +144,7 @@ describe("getList", () => {
 
     describe("indicates generic error", () => {
       it("should throw EmailOctopusError", async () => {
-        const mockAxios = axios.get as jest.MockedFunction<typeof axios.get>;
-        mockAxios.mockRejectedValue(new Error("generic error"));
+        mockAxios.onGet().replyOnce(500, {});
 
         const result = await getList(FAKE_API_KEY)({ listId }).catch(
           (error) => error,
