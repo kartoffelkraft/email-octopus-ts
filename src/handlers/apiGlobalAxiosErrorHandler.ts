@@ -8,7 +8,7 @@ import {
 import { UnknownError } from "../errors/UnknownError";
 import { ApiWideErrorResponses } from "../types";
 
-export const handleApiGlobalErrors = (
+export const handleApiGlobalAxiosErrors = (
   error: AxiosError,
   errorData: ApiWideErrorResponses,
 ): void => {

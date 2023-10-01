@@ -1,7 +1,7 @@
 import axios from "axios";
 import { EmailOctopusError } from "../errors/EmailOctopusError";
 import { Paging } from "./types";
-import { handleApiGlobalErrors } from "../handlers/apiGlobalErrorHandler";
+import { handleApiGlobalAxiosErrors } from "../handlers/apiGlobalAxiosErrorHandler";
 import { Contact, ApiWideErrorResponses } from "../types";
 
 type GetAllContactsProps = {
@@ -53,7 +53,7 @@ export const getAllContacts =
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorData = error.response?.data as ApiWideErrorResponses;
-        handleApiGlobalErrors(error, errorData);
+        handleApiGlobalAxiosErrors(error, errorData);
       }
       throw new EmailOctopusError();
     }

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { List, Paging } from "./types";
 import { EmailOctopusError } from "../emailOctopus";
-import { handleApiGlobalErrors } from "../handlers/apiGlobalErrorHandler";
+import { handleApiGlobalAxiosErrors } from "../handlers/apiGlobalAxiosErrorHandler";
 import { ApiWideErrorResponses } from "../types";
 
 type GetAllListProps = {
@@ -33,7 +33,7 @@ export const getAllLists =
       if (axios.isAxiosError(error) && error.response) {
         const errorData = error.response?.data as ApiWideErrorResponses;
 
-        handleApiGlobalErrors(error, errorData);
+        handleApiGlobalAxiosErrors(error, errorData);
       }
       throw new EmailOctopusError();
     }
