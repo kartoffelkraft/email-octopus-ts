@@ -10,6 +10,7 @@ import {
 } from "../emailOctopus";
 import { UnknownError } from "../errors/UnknownError";
 import AxiosMockAdapter from "axios-mock-adapter";
+import type { List } from "./types";
 
 const mockAxios = new AxiosMockAdapter(axios);
 
@@ -19,9 +20,17 @@ describe("getList", () => {
 
   describe("request successful", () => {
     it("should return the list", async () => {
-      const expectedList = {
-        id: listId,
-        name: "List 1",
+      const expectedList: List = {
+        id: "9e4ebe5b-a406-4c1a-af2c-fcd2c84e8e66",
+        name: "Example list name",
+        double_opt_in: false,
+        fields: [],
+        counts: {
+          pending: 0,
+          subscribed: 5,
+          unsubscribed: 0,
+        },
+        created_at: "2023-09-30T00:00:00+00:00",
       };
 
       mockAxios.onGet().replyOnce(200, expectedList);
