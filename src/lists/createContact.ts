@@ -3,7 +3,7 @@ import {
   MemberExistsWithEmailAddressError,
   EmailOctopusError,
 } from "../emailOctopus";
-import { handleApiGlobalErrors } from "../handlers/apiGlobalErrorHandler";
+import { handleApiGlobalAxiosErrors } from "../handlers/apiGlobalAxiosErrorHandler";
 import { Contact, ApiWideErrorResponses } from "../types";
 
 export type CreateContactProps = {
@@ -43,7 +43,7 @@ export const createContact =
         if (errorData.code === "MEMBER_EXISTS_WITH_EMAIL_ADDRESS") {
           throw new MemberExistsWithEmailAddressError();
         }
-        handleApiGlobalErrors(error, errorData);
+        handleApiGlobalAxiosErrors(error, errorData);
       }
       throw new EmailOctopusError();
     }

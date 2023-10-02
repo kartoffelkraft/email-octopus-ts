@@ -2,7 +2,7 @@ import axios from "axios";
 import { List } from "./types";
 import { EmailOctopusError } from "../emailOctopus";
 import { ListNotFoundError } from "../errors/ListNotFoundError";
-import { handleApiGlobalErrors } from "../handlers/apiGlobalErrorHandler";
+import { handleApiGlobalAxiosErrors } from "../handlers/apiGlobalAxiosErrorHandler";
 import { ApiWideErrorResponses } from "../types";
 
 type GetListProps = {
@@ -35,7 +35,7 @@ export const getList =
         if (errorData.code === "LIST_NOT_FOUND") {
           throw new ListNotFoundError();
         }
-        handleApiGlobalErrors(error, errorData);
+        handleApiGlobalAxiosErrors(error, errorData);
       }
       throw new EmailOctopusError();
     }
