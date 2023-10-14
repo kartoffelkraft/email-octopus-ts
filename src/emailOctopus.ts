@@ -9,6 +9,7 @@ import { createList } from "./lists/createList";
 import { getAllContacts } from "./lists/getAllContacts";
 import { getAllLists } from "./lists/getAllLists";
 import { getList } from "./lists/getList";
+import { deleteContact } from "./lists/deleteContact"
 
 export {
   ApiKeyInvalidError,
@@ -27,6 +28,7 @@ export const emailOctopus = (apiKey: string) => {
       createList: createList(apiKey),
       getAllContacts: getAllContacts(apiKey),
       createContact: createContact(apiKey),
+      deleteContact: deleteContact(apiKey),
     },
   };
 };
