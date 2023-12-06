@@ -24,7 +24,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.10",
+    "@types/jest": "^29.5.11",
     "@types/node": "^20.10.3",
     "axios-mock-adapter": "^1.22.0",
     "husky": "^8.0.3",
